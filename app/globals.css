@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0A0805;
+  --foreground: #F5EDDC;
+}
+
+@layer base {
+  * {
+    @apply border-cc-mahogany/30;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-cc-void text-cc-cream font-body text-body;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Grain texture overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-cc-espresso;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-cc-copper/50 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cc-copper;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-[1400px] mx-auto px-4 md:px-8 lg:px-12;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  .hero-gradient {
+    background: radial-gradient(at center, #3D2010, #0A0805);
+  }
+  
+  .card-gradient {
+    background: linear-gradient(145deg, #1C1410, #0E0C09);
+  }
+  
+  .copper-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(196,120,48,0.3), transparent);
+  }
+  
+  .eyebrow-label {
+    @apply font-sub-display text-eyebrow uppercase tracking-[0.25em] text-cc-copper;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-sub-display text-xs uppercase tracking-wider 
+           border border-cc-copper text-cc-copper transition-all duration-normal ease-primary
+           hover:bg-cc-copper hover:text-cc-void focus:outline-none focus:ring-2 focus:ring-cc-copper/50;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 font-sub-display text-xs uppercase tracking-wider 
+           text-cc-cream transition-all duration-normal ease-primary
+           hover:text-cc-copper focus:outline-none;
+  }
+  
+  .nav-link {
+    @apply font-body text-caption text-cc-fog transition-all duration-fast
+           hover:text-cc-cream relative;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-cc-copper transition-all duration-fast;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .input-field {
+    @apply bg-transparent border-0 border-b border-cc-mahogany text-cc-cream 
+           placeholder:text-cc-fog/50 focus:outline-none focus:border-cc-copper
+           transition-all duration-normal w-full py-2;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-normal ease-primary hover:scale-[1.02] hover:shadow-2xl;
+  }
+}
+
+@layer utilities {
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8;
+    transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .animate-on-scroll.in-view {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .clip-path-circle {
+    clip-path: circle(0% at 50% 50%);
+  }
+  
+  .clip-path-circle-full {
+    clip-path: circle(150% at 50% 50%);
+  }
+}

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CoffeeCraft | Reserve a Table</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&amp;family=Cormorant+SC:wght@300;400;700&amp;family=Jost:wght@300;400;500&amp;family=Pinyon+Script&amp;family=DM+Mono:wght@300;400&amp;family=Newsreader:opsz,wght@6..72,300;400&amp;family=Plus+Jakarta+Sans:wght@300;400&amp;family=Inter:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .cinematic-scroll {
+            scroll-behavior: smooth;
+        }
+        /* Custom Input Underline Animation */
+        .reserve-input:focus-within label {
+            transform: translateY(-20px) scale(0.85);
+            color: #ffb77b;
+        }
+        .reserve-input label {
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #16130F;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #534438;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "on-tertiary-fixed": "#241a0e",
+              "inverse-on-surface": "#33302b",
+              "surface-container-low": "#1e1b17",
+              "on-error": "#690005",
+              "primary": "#ffb77b",
+              "surface-variant": "#38342f",
+              "secondary": "#f0c052",
+              "on-primary-container": "#432100",
+              "on-surface-variant": "#d8c2b3",
+              "inverse-surface": "#e8e1da",
+              "surface": "#16130f",
+              "inverse-primary": "#8f4e02",
+              "on-surface": "#e8e1da",
+              "tertiary": "#d6c3b1",
+              "surface-container-highest": "#38342f",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#d6c3b1",
+              "on-tertiary": "#3a2e22",
+              "surface-container": "#221f1b",
+              "on-error-container": "#ffdad6",
+              "primary-container": "#cc7e36",
+              "on-primary-fixed-variant": "#6d3a00",
+              "secondary-fixed-dim": "#f0c052",
+              "surface-dim": "#16130f",
+              "on-secondary-fixed-variant": "#5c4300",
+              "on-tertiary-container": "#33281b",
+              "secondary-fixed": "#ffdf9f",
+              "outline-variant": "#534438",
+              "on-secondary-container": "#372700",
+              "tertiary-fixed": "#f3dfcc",
+              "on-primary": "#4d2700",
+              "outline": "#a18d7f",
+              "primary-fixed": "#ffdcc2",
+              "tertiary-container": "#9f8e7d",
+              "surface-tint": "#ffb77b",
+              "on-secondary-fixed": "#261a00",
+              "on-primary-fixed": "#2e1500",
+              "primary-fixed-dim": "#ffb77b",
+              "on-tertiary-fixed-variant": "#524437",
+              "surface-bright": "#3c3934",
+              "on-secondary": "#402d00",
+              "background": "#16130f",
+              "surface-container-lowest": "#100e0a",
+              "secondary-container": "#b58a1f",
+              "on-background": "#e8e1da",
+              "surface-container-high": "#2d2a25"
+            },
+            fontFamily: {
+              "headline": ["Cormorant Garamond"],
+              "body": ["Jost"],
+              "label": ["DM Mono"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-container selection:text-on-primary-container">
+<div class="grain-overlay"></div>
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#16130F]/60 backdrop-blur-xl shadow-[0_20px_40px_rgba(196,120,48,0.08)]">
+<div class="flex justify-between items-center px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="text-2xl font-['Cormorant_SC'] tracking-widest text-[#C47830] uppercase">CoffeeCraft</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="font-['Cormorant_Garamond'] font-light tracking-tight text-lg text-[#E6D5C5]/70 hover:text-[#FFB77B] transition-colors duration-500" href="#">The Alchemist</a>
+<a class="font-['Cormorant_Garamond'] font-light tracking-tight text-lg text-[#E6D5C5]/70 hover:text-[#FFB77B] transition-colors duration-500" href="#">Origin Legend</a>
+<a class="font-['Cormorant_Garamond'] font-light tracking-tight text-lg text-[#E6D5C5]/70 hover:text-[#FFB77B] transition-colors duration-500" href="#">Brew Lab</a>
+<a class="font-['Cormorant_Garamond'] font-light tracking-tight text-lg text-[#E6D5C5]/70 hover:text-[#FFB77B] transition-colors duration-500" href="#">Journal</a>
+</div>
+<button class="bg-gradient-to-r from-primary to-primary-container text-on-primary px-6 py-2 rounded-sm text-xs font-medium tracking-widest uppercase hover:scale-[1.02] transition-transform duration-300">Reserve a Table</button>
+</div>
+</nav>
+<main class="min-h-screen flex flex-col md:flex-row pt-24 md:pt-0">
+<!-- Left Column: Atmospheric Visual -->
+<section class="hidden md:block w-full md:w-1/2 relative h-screen sticky top-0 overflow-hidden">
+<img alt="Atmospheric coffee shop interior" class="w-full h-full object-cover" data-alt="Moody dark espresso bar interior with warm copper light fixtures reflecting on dark wooden surfaces and rising steam in soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvdkv1oIW_YrA6DwdCTTc7gkaJJJMxmq8nJhIdSLFUAGgDJIVYIYBe1egduLnPbW-wDJ59mLIfS9IpjwBsjIzqe88NT9yQj6J9rbrrOKGgO2X33plCUWb6U3NQ0ziPGPnBssaK8HotK0BaDMLHySaIz2C57LVXy8ewYtSt-wFYRztAFkqYJasSH-Nk2k07K82AEmfnxrZfQrDtnA0q5NXZ0rPCvE1gw4cyfKeTkXK-mV5MCqO4smX-pDelZ11LXt5XMXSCuf6Prgg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 shadow-[inset_0_0_150px_rgba(196,120,48,0.2)]"></div>
+<div class="absolute bottom-16 left-16 max-w-sm">
+<span class="font-['Pinyon_Script'] text-primary text-4xl mb-2 block">The Alchemist’s Nook</span>
+<h2 class="font-headline text-5xl font-light tracking-tight text-on-surface mb-4">A sensory sanctuary for the ritual of extraction.</h2>
+<div class="flex items-center gap-4 text-xs font-label text-outline uppercase tracking-widest">
+<span>45.4215° N, 75.6972° W</span>
+<span class="w-8 h-px bg-outline-variant"></span>
+<span>EST. 2024</span>
+</div>
+</div>
+</section>
+<!-- Right Column: Reservation Form -->
+<section class="w-full md:w-1/2 bg-[#1C1410] px-8 md:px-20 py-12 md:py-24 flex flex-col justify-center min-h-screen">
+<div class="max-w-md mx-auto w-full">
+<header class="mb-12">
+<h3 class="font-['Cormorant_SC'] text-primary text-sm tracking-[0.3em] uppercase mb-4">Reservation</h3>
+<h1 class="font-headline text-4xl text-on-surface leading-tight">Secure your seat at the lab.</h1>
+</header>
+<form class="space-y-12">
+<!-- Text Inputs -->
+<div class="space-y-10">
+<div class="relative reserve-input group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface py-2 px-0 peer transition-all duration-300" id="name" placeholder=" " type="text"/>
+<label class="absolute left-0 top-2 text-outline-variant font-label text-xs uppercase tracking-widest peer-focus:text-primary peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-90" for="name">Guest Name</label>
+</div>
+<div class="relative reserve-input group">
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-on-surface py-2 px-0 peer transition-all duration-300" id="email" placeholder=" " type="email"/>
+<label class="absolute left-0 top-2 text-outline-variant font-label text-xs uppercase tracking-widest peer-focus:text-primary peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-90" for="email">Digital Contact (Email)</label>
+</div>
+</div>
+<!-- Date & Time -->
+<div class="space-y-8">
+<div>
+<span class="block font-label text-[10px] text-outline uppercase tracking-[0.2em] mb-4">Select Date</span>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-0 text-on-surface font-label text-xs uppercase tracking-widest p-4 rounded-sm focus:ring-1 focus:ring-primary/30 transition-all cursor-pointer" type="date"/>
+<span class="material-symbols-outlined absolute right-4 top-3.5 text-primary text-xl pointer-events-none">calendar_today</span>
+</div>
+</div>
+<div>
+<span class="block font-label text-[10px] text-outline uppercase tracking-[0.2em] mb-4">Atmosphere Preference</span>
+<div class="flex flex-wrap gap-2">
+<label class="cursor-pointer group">
+<input class="hidden peer" name="time" type="radio"/>
+<span class="px-5 py-2.5 bg-surface-container-low text-on-surface-variant font-label text-[10px] tracking-widest uppercase border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all duration-300 block">Morning</span>
+</label>
+<label class="cursor-pointer group">
+<input checked="" class="hidden peer" name="time" type="radio"/>
+<span class="px-5 py-2.5 bg-surface-container-low text-on-surface-variant font-label text-[10px] tracking-widest uppercase border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all duration-300 block">Afternoon</span>
+</label>
+<label class="cursor-pointer group">
+<input class="hidden peer" name="time" type="radio"/>
+<span class="px-5 py-2.5 bg-surface-container-low text-on-surface-variant font-label text-[10px] tracking-widest uppercase border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all duration-300 block">Evening</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Party Size -->
+<div>
+<span class="block font-label text-[10px] text-outline uppercase tracking-[0.2em] mb-4">Party Size</span>
+<div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
+<label class="cursor-pointer" v-for="n in 8">
+<input class="hidden peer" name="party" type="radio" value="1"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">1</span>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="hidden peer" name="party" type="radio" value="2"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">2</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="party" type="radio" value="3"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">3</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="party" type="radio" value="4"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">4</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="party" type="radio" value="5"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">5</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="party" type="radio" value="6"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">6</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="party" type="radio" value="7"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">7</span>
+</label>
+<label class="cursor-pointer">
+<input class="hidden peer" name="party" type="radio" value="8"/>
+<span class="flex items-center justify-center w-full aspect-square bg-surface-container-low text-on-surface-variant font-label text-xs border border-transparent peer-checked:border-primary peer-checked:text-primary transition-all block">8</span>
+</label>
+</div>
+</div>
+<!-- CTA -->
+<button class="group relative w-full py-5 bg-gradient-to-br from-primary to-primary-container text-on-primary font-body font-bold text-xs tracking-[0.25em] uppercase transition-all duration-500 hover:shadow-[0_0_20px_rgba(196,120,48,0.4)]" type="button">
+                        CONFIRM YOUR TABLE
+                        <div class="absolute inset-0 border border-white/20 scale-95 group-hover:scale-100 transition-transform duration-500"></div>
+</button>
+</form>
+<!-- Success State Overlay (Hidden by Default) -->
+<div class="hidden fixed inset-0 z-[60] bg-background flex items-center justify-center text-center p-8" id="success-state">
+<div class="max-w-md">
+<svg class="mx-auto w-32 h-32 mb-8" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path class="draw-path" d="M20 40C20 30 30 25 50 25C70 25 80 30 80 40V65C80 75 70 80 50 80C30 80 20 75 20 65V40Z" stroke="#FFB77B" stroke-linecap="round" stroke-width="2"></path>
+<path class="draw-path" d="M80 45C85 45 92 48 92 55C92 62 85 65 80 65" stroke="#FFB77B" stroke-linecap="round" stroke-width="2"></path>
+<path class="draw-path" d="M35 15C35 15 38 5 42 15" stroke="#FFB77B" stroke-linecap="round" stroke-width="1.5"></path>
+<path class="draw-path" d="M48 15C48 15 51 5 55 15" stroke="#FFB77B" stroke-linecap="round" stroke-width="1.5"></path>
+<path class="draw-path" d="M61 15C61 15 64 5 68 15" stroke="#FFB77B" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+<h2 class="font-headline text-4xl mb-4">The table is set.</h2>
+<p class="font-body text-outline-variant tracking-wide mb-8">An alchemist will confirm your reservation via digital parchment shortly.</p>
+<button class="font-label text-xs uppercase tracking-widest text-primary border-b border-primary pb-1" onclick="document.getElementById('success-state').classList.add('hidden')">Return to Lab</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#100E0A] border-t border-[#534438]/15 relative w-full py-20 px-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start w-full max-w-screen-2xl mx-auto">
+<div class="space-y-6">
+<div class="font-['Pinyon_Script'] text-3xl text-[#FFB77B] lowercase">coffeecraft</div>
+<p class="font-['Jost'] font-light text-sm text-[#E6D5C5]/50 leading-relaxed max-w-xs uppercase tracking-widest">
+                    Extraction is a science. Experience is an art. Join the obsession.
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="space-y-4">
+<span class="font-['DM_Mono'] text-[10px] text-primary tracking-widest uppercase">Philosophy</span>
+<ul class="space-y-2 font-['Jost'] font-light text-sm tracking-widest uppercase text-[#E6D5C5]/40">
+<li><a class="hover:text-[#FFB77B] transition-colors" href="#">Sourcing</a></li>
+<li><a class="hover:text-[#FFB77B] transition-colors" href="#">Roasting</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<span class="font-['DM_Mono'] text-[10px] text-primary tracking-widest uppercase">Connect</span>
+<ul class="space-y-2 font-['Jost'] font-light text-sm tracking-widest uppercase text-[#E6D5C5]/40">
+<li><a class="hover:text-[#FFB77B] transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-[#FFB77B] transition-colors" href="#">Terms</a></li>
+</ul>
+</div>
+</div>
+<div class="flex flex-col items-end gap-6">
+<div class="text-right">
+<div class="font-['DM_Mono'] text-xs text-on-surface">BREW LAB OPEN DAILY</div>
+<div class="font-['Jost'] text-xs text-outline-variant tracking-widest uppercase">07:00 — 22:00</div>
+</div>
+<div class="font-['Jost'] font-light text-[10px] tracking-widest uppercase text-[#E6D5C5]/30">
+                    © 2024 CoffeeCraft. The Obsessive Alchemist.
+                </div>
+</div>
+</div>
+</footer>
+<style>
+        /* Minimalist Draw Animation Simulation */
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        .draw-path {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: dash 3s ease-in-out forwards;
+        }
+    </style>
+</body></html>

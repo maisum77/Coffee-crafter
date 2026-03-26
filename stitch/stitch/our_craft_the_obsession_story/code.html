@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&amp;family=Cormorant+SC:wght@300;400;700&amp;family=Jost:wght@300;400;500&amp;family=Pinyon+Script&amp;family=DM+Mono:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "on-tertiary-fixed": "#241a0e",
+              "inverse-on-surface": "#33302b",
+              "surface-container-low": "#1e1b17",
+              "on-error": "#690005",
+              "primary": "#ffb77b",
+              "surface-variant": "#38342f",
+              "secondary": "#f0c052",
+              "on-primary-container": "#432100",
+              "on-surface-variant": "#d8c2b3",
+              "inverse-surface": "#e8e1da",
+              "surface": "#16130f",
+              "inverse-primary": "#8f4e02",
+              "on-surface": "#e8e1da",
+              "tertiary": "#d6c3b1",
+              "surface-container-highest": "#38342f",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#d6c3b1",
+              "on-tertiary": "#3a2e22",
+              "surface-container": "#221f1b",
+              "on-error-container": "#ffdad6",
+              "primary-container": "#cc7e36",
+              "on-primary-fixed-variant": "#6d3a00",
+              "secondary-fixed-dim": "#f0c052",
+              "surface-dim": "#16130f",
+              "on-secondary-fixed-variant": "#5c4300",
+              "on-tertiary-container": "#33281b",
+              "secondary-fixed": "#ffdf9f",
+              "outline-variant": "#534438",
+              "on-secondary-container": "#372700",
+              "tertiary-fixed": "#f3dfcc",
+              "on-primary": "#4d2700",
+              "outline": "#a18d7f",
+              "primary-fixed": "#ffdcc2",
+              "tertiary-container": "#9f8e7d",
+              "surface-tint": "#ffb77b",
+              "on-secondary-fixed": "#261a00",
+              "on-primary-fixed": "#2e1500",
+              "primary-fixed-dim": "#ffb77b",
+              "on-tertiary-fixed-variant": "#524437",
+              "surface-bright": "#3c3934",
+              "on-secondary": "#402d00",
+              "background": "#16130f",
+              "surface-container-lowest": "#100e0a",
+              "secondary-container": "#b58a1f",
+              "on-background": "#e8e1da",
+              "surface-container-high": "#2d2a25"
+            },
+            fontFamily: {
+              "headline": ["Cormorant Garamond"],
+              "body": ["Jost"],
+              "label": ["DM Mono"],
+              "display-sc": ["Cormorant SC"],
+              "script": ["Pinyon Script"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #16130F;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" stroke="%23C47830" stroke-width="1" fill="none"/></svg>'), auto;
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .cinematic-scroll {
+            scroll-behavior: smooth;
+        }
+        .chapter-title {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+        .sketch-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            transition: stroke-dashoffset 2s ease-in-out;
+        }
+        .group:hover .sketch-path {
+            stroke-dashoffset: 0;
+        }
+        .img-editorial {
+            filter: grayscale(1) contrast(1.1);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .img-editorial {
+            filter: grayscale(0) contrast(1);
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body selection:bg-primary-container selection:text-on-primary-container overflow-x-hidden">
+<div class="grain-overlay"></div>
+<!-- Immersive Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#16130F]/40 backdrop-blur-md">
+<div class="flex justify-between items-center px-8 md:px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="text-xl md:text-2xl font-display-sc tracking-[0.3em] text-primary uppercase">CoffeeCraft</div>
+<div class="hidden md:flex gap-16 items-center">
+<a class="font-label text-[10px] tracking-[0.3em] text-on-surface/50 hover:text-primary transition-colors uppercase" href="#">01. Sourcing</a>
+<a class="font-label text-[10px] tracking-[0.3em] text-primary uppercase border-b border-primary/30 pb-1" href="#">02. Roasting</a>
+<a class="font-label text-[10px] tracking-[0.3em] text-on-surface/50 hover:text-primary transition-colors uppercase" href="#">03. Extraction</a>
+</div>
+<button class="border border-primary/20 hover:border-primary/60 text-primary font-label text-[10px] tracking-[0.3em] uppercase px-6 py-2 transition-all">
+            Inquire
+        </button>
+</div>
+</nav>
+<main class="cinematic-scroll">
+<!-- Hero / Intro -->
+<section class="h-[90vh] flex flex-col justify-center items-center relative overflow-hidden px-6">
+<div class="absolute inset-0 z-0 opacity-20">
+<img class="w-full h-full object-cover" data-alt="close up of roasted coffee beans in macro detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQekScNS-6hp99ZaevEkdR8H4GQ7rRWO3EaNwvQzn4puruoOfqHew3VJC4kPRxL91Y8g_2N_2jTbM09BxrDQnf-yBo16I5T-Leq9WdylNAsWvkuJRGR32CNnbQwF-ZqKE9hkYHFZkVn6qkni6Bt-GqGXtA-puEF2MMoMBO6YUpE_mE0o-ag4cp0Lnot6Ae1SCDxQ82VobB1EGPqoIWHkyGdDHQQmNGQT9pkfC0yLzAqIFRh6ro916EGVXvsCKTESRrcGhPW1VZQo8"/>
+</div>
+<div class="relative z-10 text-center space-y-8 max-w-4xl">
+<span class="font-label text-[10px] tracking-[0.6em] text-primary uppercase animate-pulse">The Archive of Craft</span>
+<h1 class="font-headline text-7xl md:text-[10rem] font-light tracking-tighter leading-none mb-12">The <span class="italic">Obsession</span></h1>
+<p class="font-script text-4xl text-primary-container/80 max-w-lg mx-auto leading-relaxed">"True alchemy is not the gold we find, but the precision we apply to the common bean."</p>
+</div>
+<div class="absolute bottom-12 left-12">
+<span class="font-label text-[10px] tracking-widest text-on-surface/30 uppercase">Scroll to descend</span>
+</div>
+</section>
+<!-- Chapter 01: Sourcing -->
+<section class="min-h-screen py-40 relative group">
+<div class="max-w-screen-2xl mx-auto px-12 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+<!-- Asymmetric Layout -->
+<div class="md:col-span-1 hidden md:block">
+<span class="chapter-title font-display-sc text-primary tracking-[0.8em] text-xs uppercase opacity-30 transform -translate-y-20">Chapter 01: Sourcing</span>
+</div>
+<div class="md:col-span-5 pt-32 space-y-12">
+<div class="space-y-4">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary uppercase">I. Terroir selection</span>
+<h2 class="font-headline text-7xl font-light tracking-tight leading-none text-on-surface">The Cloud <br/><span class="italic">Micro-lots</span></h2>
+</div>
+<p class="font-body text-xl text-on-surface-variant font-light leading-relaxed">
+                    We ignore the commercial markets. Our director of sourcing, Aria Kose, spends months in the highlands of Huehuetenango and Yirgacheffe, negotiating for rows, not tons.
+                </p>
+<div class="bg-surface-container-low p-8 border-l border-primary/20">
+<p class="font-script text-3xl text-primary/80">"The soil remembers the rain of ten years ago. You can taste the history in a single cherry."</p>
+</div>
+</div>
+<div class="md:col-span-6 relative group">
+<div class="aspect-[4/5] overflow-hidden rounded-[1px] shadow-2xl relative">
+<img class="img-editorial w-full h-full object-cover" data-alt="dramatic mountain coffee plantation with mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC6MmLyqdWx2A0M8PHGSY5asLcA2hmtGhkNklLoqELqbcu-ZV8Z_NF0eRkDR5rhVC9ZU26vk2nO39-F92haiTz50liIv6z6DdF29zr-BzmwOqou1FG7Awq4a0HIovbvFTzkjDJuYS2HOk54PBpMkpI852htEHeGomRZY739IRy7zTFT3ejEhWToQkj4xMz19lOONfgXktltV42eQc9Pn5J1NpeiHRRrr35YYTjFQ1Qfp6dx8rMv7uKySdIinHRI-rdP8RDQkmBeBw"/>
+</div>
+<div class="absolute -bottom-10 -left-10 bg-surface p-10 border border-outline-variant/20 shadow-xl hidden md:block">
+<span class="font-label text-[10px] tracking-widest text-primary block mb-2 uppercase">2100 MASL • Terroir Alpha</span>
+<p class="font-headline text-2xl italic">"Where the air thins, <br/>the flavor thickens."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Chapter 02: The Roast (Timeline Sketch) -->
+<section class="bg-surface-container-lowest py-60 relative group overflow-hidden">
+<div class="max-w-screen-xl mx-auto px-12 relative z-10">
+<div class="text-center mb-40">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary uppercase mb-6 block">Chapter 02: Roasting</span>
+<h2 class="font-headline text-8xl font-light tracking-tighter">The Maillard <span class="italic text-primary-container">Equation</span></h2>
+</div>
+<!-- Alchemist's Sketch Timeline -->
+<div class="relative h-[600px] flex items-center justify-center">
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" fill="none" viewbox="0 0 1000 600">
+<path class="sketch-path" d="M50 400 C 150 400, 250 380, 400 350 S 600 200, 750 150 S 950 100, 950 100" stroke="#ffb77b" stroke-width="1.5"></path>
+<circle cx="50" cy="400" fill="#ffb77b" r="4"></circle>
+<circle cx="400" cy="350" fill="#ffb77b" r="4"></circle>
+<circle cx="750" cy="150" r="6" stroke="#ffb77b" stroke-width="2"></circle>
+</svg>
+<div class="grid grid-cols-1 md:grid-cols-4 w-full gap-8 relative z-20">
+<div class="space-y-4 hover:translate-y-[-10px] transition-transform duration-500 bg-surface/40 p-6 backdrop-blur-sm border border-outline-variant/10">
+<span class="font-label text-[9px] tracking-[0.3em] text-on-surface/40 uppercase">Phase 01 / 100°C</span>
+<h4 class="font-headline text-3xl">Desiccation</h4>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant">The bean sheds its watery mask. Smells of hay and morning grass fill the lab.</p>
+<span class="font-script text-2xl text-primary opacity-60">"The green release"</span>
+</div>
+<div class="space-y-4 mt-20 hover:translate-y-[-10px] transition-transform duration-500 bg-surface/40 p-6 backdrop-blur-sm border border-outline-variant/10">
+<span class="font-label text-[9px] tracking-[0.3em] text-on-surface/40 uppercase">Phase 02 / 160°C</span>
+<h4 class="font-headline text-3xl">Yellowing</h4>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant">Sugars begin to toast. Complex chain reactions restructure the core.</p>
+</div>
+<div class="space-y-4 mt-4 hover:translate-y-[-10px] transition-transform duration-500 bg-primary/10 p-8 backdrop-blur-md border border-primary/40 ring-1 ring-primary/20">
+<span class="font-label text-[9px] tracking-[0.3em] text-primary uppercase">Critical Point / 196°C</span>
+<h4 class="font-headline text-3xl italic">The First Crack</h4>
+<p class="font-body text-sm leading-relaxed text-on-surface">The violent birth of flavor. This 12-second window defines the entire year's harvest.</p>
+<div class="pt-4 border-t border-primary/20">
+<span class="font-label text-[8px] text-primary/60 uppercase">Manual Override Active</span>
+</div>
+</div>
+<div class="space-y-4 mt-32 hover:translate-y-[-10px] transition-transform duration-500 bg-surface/40 p-6 backdrop-blur-sm border border-outline-variant/10">
+<span class="font-label text-[9px] tracking-[0.3em] text-on-surface/40 uppercase">Final Phase</span>
+<h4 class="font-headline text-3xl">Resting</h4>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant">Degassing in a vacuum-sealed chamber. Patience is the final ingredient.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Chapter 03: The Hand (Team) -->
+<section class="py-40 px-12 relative overflow-hidden">
+<div class="max-w-screen-2xl mx-auto flex flex-col md:flex-row gap-20">
+<div class="md:w-1/3">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary uppercase block mb-8">Chapter 03: The Artist</span>
+<h2 class="font-headline text-7xl font-light tracking-tighter leading-[0.9] mb-12">The Human <br/><span class="italic">Variable</span></h2>
+<div class="space-y-8 font-body text-lg text-on-surface-variant font-light">
+<p>Machines can repeat a process, but only a human can recognize the soul of a roast.</p>
+<p>Our team consists of four individuals who have dedicated their lives to sensory mastery. No schedules, only instincts.</p>
+</div>
+</div>
+<div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Barista 1 -->
+<div class="group relative aspect-square bg-surface-container-high overflow-hidden cursor-crosshair">
+<img class="img-editorial w-full h-full object-cover" data-alt="portrait of barista" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHzp-j53tA1Xm_noaBThODT3VEaZ9a474KsFJKDmBbPp2SYraUgOVB8gzSHq8cwxyLPouMMEeMKNcti21A-FcxohlZJPk4CAB390TxyRaRvZtUpkOg1pbF44e50gr_3KF8cuHEsHzdHmhjd-49hSQoiuZU9kqcdEpaFc5HAx4DzlxQ9sFil5zKfSPgBkmQ5-D3eUMcuZa930Kg6HSgSX70mstFcOeJRAvVySg7nIzu7aR2LEa4tVIpAODz0wDxc2ZJgqpdinkdAVo"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label text-[10px] tracking-widest text-primary uppercase mb-2">Elias Thorne</span>
+<p class="font-headline text-xl italic text-white">"I roast until the bean speaks."</p>
+</div>
+</div>
+<!-- Barista 2 -->
+<div class="group relative aspect-square bg-surface-container-high overflow-hidden cursor-crosshair mt-12 sm:mt-0">
+<img class="img-editorial w-full h-full object-cover" data-alt="portrait of barista" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg-pO84wGsYbbRi53SpRllQcXabHGNkDie8r64CT8Cii_n8RUnZxFcg_fZhzFs-SanzYmiAAnS1ZPJx_gtNSX8LjZQZ5Xwc7VJg7N-uhhP9A8h7J71qVJ4JxdwFXuP98VRZQKiTDTNvjlhqpC_L369SvQ-1wX139Y5O4uLQCk4SjLCq8HEodsf15Wq0nfAu8fT4GGOIvcgrtSaVSpxjUCVwdtdgvP5PdoBXU8YujVLs_KY8elEAEzn5h0yArcbeGxXSeN7fBW17os"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8">
+<span class="font-label text-[10px] tracking-widest text-primary uppercase mb-2">Sloane Vane</span>
+<p class="font-headline text-xl italic text-white">"Finding the hidden jasmine."</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Extraction Quote Section -->
+<section class="py-60 bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto px-12 text-center">
+<span class="material-symbols-outlined text-5xl text-primary/20 mb-12 block" data-icon="water_drop">water_drop</span>
+<blockquote class="font-headline text-5xl md:text-7xl font-light leading-tight mb-16 tracking-tight">
+                "We do not make coffee. We facilitate an <span class="italic text-primary">extraction of memory</span> from the earth."
+            </blockquote>
+<p class="font-script text-4xl text-primary-container">— Julian Marlo, Brew Chemist</p>
+</div>
+</section>
+</main>
+<!-- Minimal Editorial Footer -->
+<footer class="bg-surface py-32 px-12 border-t border-outline-variant/10">
+<div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-24">
+<div class="space-y-8">
+<div class="font-display-sc text-2xl tracking-[0.4em] text-primary uppercase">CoffeeCraft</div>
+<p class="font-body text-xs tracking-[0.2em] text-on-surface/30 uppercase leading-relaxed">
+                The Obsessive Alchemist.<br/>
+                Every pixel. Every bean. Every second.<br/>
+                © 2024
+            </p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary uppercase mb-4">Navigation</span>
+<a class="font-headline text-2xl font-light hover:italic hover:text-primary transition-all" href="#">Our Philosophy</a>
+<a class="font-headline text-2xl font-light hover:italic hover:text-primary transition-all" href="#">The Lab Notes</a>
+<a class="font-headline text-2xl font-light hover:italic hover:text-primary transition-all" href="#">Private Reserves</a>
+</div>
+<div class="space-y-8">
+<span class="font-label text-[10px] tracking-[0.4em] text-primary uppercase">The Archive</span>
+<div class="relative">
+<input class="w-full bg-transparent border-b border-outline-variant/30 py-4 font-label text-[10px] tracking-widest focus:outline-none focus:border-primary transition-colors text-on-surface uppercase" placeholder="Enter Email for Ritual Invitations" type="email"/>
+<button class="absolute right-0 bottom-4 text-primary">
+<span class="material-symbols-outlined" data-icon="arrow_right_alt">arrow_right_alt</span>
+</button>
+</div>
+<div class="flex gap-8 opacity-40 grayscale hover:grayscale-0 transition-all">
+<span class="font-label text-[9px] tracking-widest uppercase cursor-pointer">Instagram</span>
+<span class="font-label text-[9px] tracking-widest uppercase cursor-pointer">Vimeo</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Smooth scroll observer for reveals
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('opacity-100');
+                entry.target.classList.remove('translate-y-10');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.add('transition-all', 'duration-[1500ms]', 'ease-out', 'translate-y-10', 'opacity-0');
+        observer.observe(section);
+    });
+</script>
+</body></html>

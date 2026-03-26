@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CoffeeCraft - Home</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&amp;family=Cormorant+SC:wght@300;400&amp;family=DM+Mono:wght@300&amp;family=Jost:wght@300&amp;family=Pinyon+Script&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "error-container": "#93000a",
+                        "surface-container-highest": "#38342f",
+                        "tertiary": "#d6c3b1",
+                        "tertiary-fixed-dim": "#d6c3b1",
+                        "on-tertiary": "#3a2e22",
+                        "surface-container": "#221f1b",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#8f4e02",
+                        "surface": "#16130f",
+                        "on-surface": "#e8e1da",
+                        "secondary": "#f0c052",
+                        "surface-variant": "#38342f",
+                        "on-primary-container": "#432100",
+                        "on-surface-variant": "#d8c2b3",
+                        "inverse-surface": "#e8e1da",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#33302b",
+                        "on-tertiary-fixed": "#241a0e",
+                        "on-error": "#690005",
+                        "surface-container-low": "#1e1b17",
+                        "primary": "#ffb77b",
+                        "on-tertiary-fixed-variant": "#524437",
+                        "primary-fixed-dim": "#ffb77b",
+                        "surface-bright": "#3c3934",
+                        "on-secondary": "#402d00",
+                        "background": "#16130f",
+                        "surface-container-lowest": "#100e0a",
+                        "secondary-container": "#b58a1f",
+                        "on-background": "#e8e1da",
+                        "surface-container-high": "#2d2a25",
+                        "primary-fixed": "#ffdcc2",
+                        "tertiary-container": "#9f8e7d",
+                        "surface-tint": "#ffb77b",
+                        "on-primary-fixed": "#2e1500",
+                        "on-secondary-fixed": "#261a00",
+                        "outline-variant": "#534438",
+                        "secondary-fixed": "#ffdf9f",
+                        "on-secondary-container": "#372700",
+                        "tertiary-fixed": "#f3dfcc",
+                        "on-primary": "#4d2700",
+                        "outline": "#a18d7f",
+                        "on-primary-fixed-variant": "#6d3a00",
+                        "primary-container": "#cc7e36",
+                        "secondary-fixed-dim": "#f0c052",
+                        "surface-dim": "#16130f",
+                        "on-secondary-fixed-variant": "#5c4300",
+                        "on-tertiary-container": "#33281b"
+                    },
+                    fontFamily: {
+                        "display": ["Cormorant Garamond", "serif"],
+                        "sub-display": ["Cormorant SC", "serif"],
+                        "body": ["Jost", "sans-serif"],
+                        "mono": ["DM Mono", "monospace"],
+                        "script": ["Pinyon Script", "cursive"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    backgroundImage: {
+                        'primary-gradient': 'linear-gradient(135deg, var(--tw-colors-primary) 0%, var(--tw-colors-primary-container) 100%)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: theme('fontFamily.body');
+            position: relative;
+        }
+        
+        /* Grain overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .glass-nav {
+            background-color: rgba(22, 19, 15, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(83, 68, 56, 0.15); /* outline-variant at 15% */
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary-container'));
+            border-radius: theme('borderRadius.DEFAULT');
+            color: theme('colors.on-primary');
+            font-family: theme('fontFamily.body');
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 12px theme('colors.primary');
+        }
+
+        .card-no-line {
+            background-color: theme('colors.surface-container-low');
+            border-radius: theme('borderRadius.lg');
+        }
+        
+        .recessed-container {
+            background-color: theme('colors.surface-container-lowest');
+        }
+
+        /* Ambient Glow */
+        .ambient-glow:hover {
+            box-shadow: 0 20px 40px rgba(196, 120, 48, 0.08);
+        }
+        
+        .ghost-border {
+            border: 1px solid rgba(83, 68, 56, 0.15);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden min-h-screen flex flex-col">
+<!-- TopNavBar Shared Component (Included per Relevance Test - Destination Screen) -->
+<div class="relative flex w-full flex-col z-40">
+<header class="glass-nav fixed top-0 w-full flex items-center justify-between whitespace-nowrap px-10 py-4 transition-all duration-300">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-xl font-display tracking-wide uppercase">CoffeeCraft</h2>
+</div>
+<div class="flex flex-1 justify-end gap-12">
+<nav class="flex items-center gap-10">
+<a class="text-on-surface text-sm font-body tracking-widest uppercase hover:text-primary transition-colors duration-300" href="#">Menu</a>
+<a class="text-on-surface text-sm font-body tracking-widest uppercase hover:text-primary transition-colors duration-300" href="#">Our Craft</a>
+<a class="text-on-surface text-sm font-body tracking-widest uppercase hover:text-primary transition-colors duration-300" href="#">Shop</a>
+<a class="text-on-surface text-sm font-body tracking-widest uppercase hover:text-primary transition-colors duration-300" href="#">Visit Us</a>
+</nav>
+<button class="btn-primary flex h-10 px-6 items-center justify-center font-bold text-xs">
+<span>Order Now</span>
+</button>
+</div>
+</header>
+</div>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col pt-20">
+<!-- Hero Section -->
+<section class="relative w-full h-[870px] flex items-center justify-center px-10 overflow-hidden bg-background">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 z-10"></div>
+<img alt="Close up of dark rich espresso pouring into a ceramic cup with steam rising against a dark moody background" class="w-full h-full object-cover object-center opacity-60 mix-blend-luminosity" data-alt="Macro shot of dark espresso extraction with golden crema pouring into a matte black cup, wispy steam rising, dramatic low-key lighting, moody atmospheric background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOE2mxeC5pG4N2MK3OmXHjBJQfGAmSHcccYIdP27uqfB4SjMbxaCQgyAgxbd_dWQfmmG4842wky1vO_xbbqm8ghWvTXISTFTb49Rbgmw9yVzrNgD6t6Y75lkuvXauO9cvuCut6OIDSIXq6R3xF6BTGr18PDWoQ2e6k4PmtLFciFK-HIN-L1RqUgoQXhO5o-ClW6f0pxaH8AIVfXS0ab9r2ju_Z8HgkcyeDAVJdcrUVFQrpeZ4qRx0m2VSA7FaEm-In-fF4aYD1BeY"/>
+</div>
+<div class="relative z-20 flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
+<h1 class="font-display text-on-surface text-6xl md:text-8xl font-light tracking-[-0.02em] leading-tight drop-shadow-2xl">
+                    Crafted for Those Who Know the Difference.
+                </h1>
+<div class="flex flex-col items-center gap-6 mt-8">
+<p class="font-mono text-primary text-xs tracking-widest uppercase">Extraction 1:2 • 93°C • 28s</p>
+<button class="btn-primary flex h-12 px-10 items-center justify-center text-sm">
+<span>Discover the Craft</span>
+</button>
+</div>
+</div>
+</section>
+<!-- The Statement Section -->
+<section class="py-32 px-10 bg-surface-container-low flex justify-center items-center">
+<div class="max-w-3xl text-center space-y-6">
+<h2 class="font-sub-display text-primary text-sm tracking-[0.2em] uppercase mb-4">The Statement</h2>
+<p class="font-display italic text-on-surface text-3xl md:text-4xl font-light leading-relaxed tracking-wide">
+                    "Coffee is not a beverage. It's a moment of clarity. Every drop tells a story of dedication and mastery."
+                </p>
+<div class="mt-8 flex justify-end pr-10">
+<span class="font-script text-primary text-4xl opacity-80 rotate-[-5deg]">The Alchemist</span>
+</div>
+</div>
+</section>
+<!-- Featured Categories Grid -->
+<section class="py-24 px-10 bg-background">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end border-b border-outline-variant/15 pb-6 mb-16">
+<h2 class="font-sub-display text-on-surface text-2xl tracking-widest uppercase">Curations</h2>
+<span class="font-mono text-on-surface-variant text-xs tracking-widest">01 / 03</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Category 1 -->
+<div class="card-no-line group cursor-pointer overflow-hidden ambient-glow relative h-[500px]">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest to-transparent z-10 opacity-80"></div>
+<img alt="Dark espresso shot" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity opacity-50 group-hover:opacity-70" data-alt="Overhead close-up of a perfect espresso shot in a dark ceramic cup, thick golden tiger-striped crema, moody dramatic lighting, dark textured surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5PE8AfLyVRMWC08vATdSs8vg2jMMe-RPvLMkLLuvTk5ROvfihuGcQCjfp70achWlCVX7Z3Sm4sNdIH0xMTJD4c6rWqFKFFQHhx8x7uoK3_Py27LbvCR17mss4W22m8jHSl64XCdADbLUdLKed3SdUGjOmCjww00ChNu3_IuJQlnVRQndmLJ0oCxW_XG4YVmRQXkjACaAVpK31HuVOAcyMwhsVC22zu9dBkmFcBB1Cxt5Q1VXONIzeRwH5bq6kvOXhks9S5wQRZqw"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col gap-4">
+<h3 class="font-display text-on-surface text-3xl font-light tracking-wide">Espresso</h3>
+<div class="flex items-center justify-between">
+<span class="font-mono text-primary text-xs uppercase tracking-wider">The Foundation</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Category 2 -->
+<div class="card-no-line group cursor-pointer overflow-hidden ambient-glow relative h-[500px]">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest to-transparent z-10 opacity-80"></div>
+<img alt="Pour over coffee brewing" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity opacity-50 group-hover:opacity-70" data-alt="Barista carefully pouring hot water from a copper gooseneck kettle into a glass V60 dripper, blooming coffee grounds, dark moody cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYKGl0EYTjCmj8aMdVyg5FkX5wZ0-TGUsafahD1fhIniADJ7EjLhSrOrhaessXzln292mUAUulDQaBeOOBMjuwVkdRPlWy-YCBx9WM5Ltts7Y2MpZZrMkp0HKmu2bq6JTYem8JbBdmMsrIqp2kUADJ94RguFC9eCmUc3eGNnqMvxYnwV_Rw7lm9Ze92rIlkWGpdxfw0bTLObP8gQAL606u7niSJZZ3vR853RdcNdew_XXk9i7oagJ3-EXmylHzPD9U7lwEgdWmh4U"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col gap-4">
+<h3 class="font-display text-on-surface text-3xl font-light tracking-wide">Pour-Over</h3>
+<div class="flex items-center justify-between">
+<span class="font-mono text-primary text-xs uppercase tracking-wider">The Ritual</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Category 3 -->
+<div class="card-no-line group cursor-pointer overflow-hidden ambient-glow relative h-[500px]">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest to-transparent z-10 opacity-80"></div>
+<img alt="Cold brew coffee preparation" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 mix-blend-luminosity opacity-50 group-hover:opacity-70" data-alt="Condensation on a glass beaker of dark cold brew coffee over ice, moody dimly lit background, slow extraction concept, rich amber hues" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6ryViJVxQDD2Kv7n59yf8IA_3JBFEZidTubiTn0M2K4w353gP6UIxSVQBLXHlTJ7N_xuReI4jcajSfycTOuofhn40wSiFUdeYHZ2ZrZ6rmCkKu8OsDubsVxytdVoloaKnMCS29yOJvJRJpJwueTTLOusBu9hSbcI3pj5T1df72WfiMzSFBjbKbFqUNO8RC7xAQriHE3chvEgaBJkpNLTLzySoZtFCBgR14QZWC0X_iUf8oxAXMf2_JGW6_6IIula7Ee_ake9UvvQ"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full flex flex-col gap-4">
+<h3 class="font-display text-on-surface text-3xl font-light tracking-wide">Cold Craft</h3>
+<div class="flex items-center justify-between">
+<span class="font-mono text-primary text-xs uppercase tracking-wider">The Patience</span>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</body></html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&amp;family=Cormorant+SC:wght@300;400&amp;family=Jost:wght@300;400;700&amp;family=Pinyon+Script&amp;family=DM+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error": "#ffb4ab",
+              "on-tertiary-fixed": "#241a0e",
+              "inverse-on-surface": "#33302b",
+              "surface-container-low": "#1e1b17",
+              "on-error": "#690005",
+              "primary": "#C47830", // Updated to brand copper
+              "surface-variant": "#38342f",
+              "secondary": "#E8B84B", // Gold highlight
+              "on-primary-container": "#432100",
+              "on-surface-variant": "#d8c2b3",
+              "inverse-surface": "#e8e1da",
+              "surface": "#0A0805", // Brand void
+              "inverse-primary": "#8f4e02",
+              "on-surface": "#F5EDDC", // Brand cream
+              "tertiary": "#d6c3b1",
+              "surface-container-highest": "#38342f",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#d6c3b1",
+              "on-tertiary": "#3a2e22",
+              "surface-container": "#1C1410", // Brand espresso
+              "on-error-container": "#ffdad6",
+              "primary-container": "#cc7e36",
+              "on-primary-fixed-variant": "#6d3a00",
+              "secondary-fixed-dim": "#f0c052",
+              "surface-dim": "#16130f",
+              "on-secondary-fixed-variant": "#5c4300",
+              "on-tertiary-container": "#33281b",
+              "secondary-fixed": "#ffdf9f",
+              "outline-variant": "#2E1F12", // Brand roast
+              "on-secondary-container": "#372700",
+              "tertiary-fixed": "#f3dfcc",
+              "on-primary": "#0A0805",
+              "outline": "#8A7A6A", // Brand fog
+              "primary-fixed": "#ffdcc2",
+              "tertiary-container": "#9f8e7d",
+              "surface-tint": "#C47830",
+              "on-secondary-fixed": "#261a00",
+              "on-primary-fixed": "#2e1500",
+              "primary-fixed-dim": "#ffb77b",
+              "on-tertiary-fixed-variant": "#524437",
+              "surface-bright": "#3c3934",
+              "on-secondary": "#402d00",
+              "background": "#0A0805",
+              "surface-container-lowest": "#070604",
+              "secondary-container": "#b58a1f",
+              "on-background": "#F5EDDC",
+              "surface-container-high": "#221b15"
+            },
+            fontFamily: {
+              "headline": ["Cormorant Garamond"],
+              "subheadline": ["Cormorant SC"],
+              "body": ["Jost"],
+              "mono": ["DM Mono"],
+              "script": ["Pinyon Script"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        .vignette-heavy {
+            background: radial-gradient(circle, transparent 20%, rgba(10, 8, 5, 0.9) 100%);
+        }
+        .custom-cursor {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" stroke="%23C47830" stroke-width="1" fill="none"/></svg>'), auto;
+        }
+        .text-reveal-word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: revealWord 0.8s forwards;
+        }
+        @keyframes revealWord {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .parallax-card:hover .parallax-bg {
+            transform: scale(1.1) translateY(-10px);
+        }
+        .parallax-bg {
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: #0A0805; }
+        ::-webkit-scrollbar-thumb { background: #C47830; }
+        
+        .fade-in-slow {
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        .fade-in-slow.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body custom-cursor selection:bg-primary-container selection:text-on-primary-container">
+<div class="grain-overlay"></div>
+<!-- Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0805]/40 backdrop-blur-xl border-b border-primary/10">
+<div class="flex justify-between items-center px-12 py-6 w-full max-w-screen-2xl mx-auto">
+<div class="text-xl font-subheadline tracking-[0.25em] text-primary uppercase flex items-center gap-2">
+                COFFEE<span class="font-script lowercase text-2xl mt-1 opacity-80">·</span>CRAFT
+            </div>
+<div class="hidden md:flex gap-12 items-center">
+<a class="font-subheadline text-xs tracking-widest text-on-surface hover:text-primary transition-colors duration-500 uppercase" href="#">The Alchemist</a>
+<a class="font-subheadline text-xs tracking-widest text-outline hover:text-primary transition-colors duration-500 uppercase" href="#">Origin Legend</a>
+<a class="font-subheadline text-xs tracking-widest text-outline hover:text-primary transition-colors duration-500 uppercase" href="#">Brew Lab</a>
+<a class="font-subheadline text-xs tracking-widest text-outline hover:text-primary transition-colors duration-500 uppercase" href="#">Journal</a>
+</div>
+<button class="border border-primary text-primary hover:bg-primary hover:text-surface uppercase px-6 py-2 text-[10px] font-subheadline tracking-widest transition-all duration-500">
+                Reserve a Table
+            </button>
+</div>
+</nav>
+<!-- Cinematic Hero -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0 overflow-hidden">
+<img alt="Cinematic Slow Pour" class="w-full h-full object-cover scale-110 brightness-[0.35] saturate-[1.2] parallax-bg" data-alt="Cinematic macro slow pour of thick espresso with heavy shadows, rich crema, and intentional film grain texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-66l8_4-L1X1L0q9K99O_e5R5A9v6W5N8L9R7P6O5N4M3L2K1J0I9H8G7F6E5D4C3B2A1-CoffeePour"/>
+<div class="absolute inset-0 vignette-heavy"></div>
+</div>
+<div class="relative z-10 text-center px-6">
+<div class="flex items-center justify-center gap-4 mb-8 opacity-60">
+<div class="h-[1px] w-8 bg-primary"></div>
+<span class="font-subheadline text-[10px] tracking-[0.4em] uppercase">DHA Lahore · Est. 2024</span>
+<div class="h-[1px] w-8 bg-primary"></div>
+</div>
+<h1 class="font-headline font-light text-6xl md:text-9xl tracking-tight leading-[1.1] max-w-5xl mx-auto">
+<span class="text-reveal-word" style="animation-delay: 0.2s">Crafted</span>
+<span class="text-reveal-word" style="animation-delay: 0.4s">for</span>
+<span class="text-reveal-word" style="animation-delay: 0.6s">Those</span>
+<span class="text-reveal-word" style="animation-delay: 0.8s">Who</span>
+<span class="text-reveal-word italic font-script lowercase text-primary translate-x-[-0.1em]" style="animation-delay: 1.0s">Know</span>
+<span class="text-reveal-word" style="animation-delay: 1.2s">the</span>
+<span class="text-reveal-word" style="animation-delay: 1.4s">Difference.</span>
+</h1>
+<div class="mt-16 flex flex-col items-center gap-4">
+<span class="font-mono text-[9px] text-outline uppercase tracking-[0.5em] animate-pulse">Scroll to begin ritual</span>
+<div class="w-[1px] h-24 bg-gradient-to-b from-primary/60 to-transparent"></div>
+</div>
+</div>
+<!-- Technical Micro-detail -->
+<div class="absolute bottom-12 left-12 font-mono text-[9px] text-primary/30 tracking-widest hidden lg:block">
+            LAT: 31.4697° N<br/>LONG: 74.4022° E
+        </div>
+<div class="absolute bottom-12 right-12 font-mono text-[9px] text-primary/30 tracking-widest hidden lg:block text-right">
+            EXTRACTION: 1:2<br/>PRESSURE: 9 BAR
+        </div>
+</section>
+<!-- The Cinematic Statement -->
+<section class="h-screen bg-surface flex items-center justify-center px-12 relative overflow-hidden" id="statement-section">
+<div class="absolute inset-0 opacity-10 flex items-center justify-center">
+<span class="font-headline text-[25vw] leading-none pointer-events-none text-outline-variant">"</span>
+</div>
+<div class="max-w-4xl text-center z-10 fade-in-slow" id="statement-content">
+<span class="font-script text-4xl md:text-5xl text-primary mb-12 block">Where craft meets cup.</span>
+<h2 class="font-headline italic font-light text-4xl md:text-6xl text-on-surface leading-tight">
+                "Coffee is not a drink. It is a language spoken between craft and patience."
+            </h2>
+<div class="mt-12 flex items-center justify-center gap-8">
+<div class="h-[1px] w-12 bg-primary/40"></div>
+<p class="font-subheadline text-xs tracking-[0.3em] uppercase opacity-60">— The CoffeeCraft Philosophy</p>
+<div class="h-[1px] w-12 bg-primary/40"></div>
+</div>
+</div>
+</section>
+<!-- Interactive Story Cards -->
+<section class="py-40 bg-surface-container-lowest">
+<div class="max-w-screen-2xl mx-auto px-12">
+<div class="flex flex-col md:flex-row justify-between items-end mb-24">
+<div>
+<div class="flex items-center gap-4 mb-4">
+<div class="h-[1px] w-6 bg-primary"></div>
+<span class="font-subheadline text-[10px] tracking-widest uppercase text-primary">The Collections</span>
+</div>
+<h3 class="font-headline text-5xl md:text-7xl font-light">The Sensory Archives</h3>
+</div>
+<p class="font-mono text-[10px] text-outline uppercase tracking-widest pb-2">Batch: 01-03 / System: Manual</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 h-[700px]">
+<!-- Espresso Card -->
+<div class="group relative overflow-hidden parallax-card cursor-pointer border border-outline-variant/30">
+<div class="absolute inset-0 z-0">
+<img alt="Espresso" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 parallax-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjVFas9uXHfN3EYwnmDcyf8Vaa4aobZwj9FT06Rj8xASMhLSf3_uo12gVDl0A6bTBzzSX3-HW15tz72RY47eV28ewPA8CATLmQkJoCvK0dMN4oiTM_e98s1ECc-MIHXKfeAfYPZ3jBcjU3SWgb65oWYe5ZQmVpjfFsfh1nZRc5_RWDBj2Ae7DmzXdUuvHLA9A5YO3Z1hUna2_NGWyWi8316K8P9YqmxBYpElT0PM18uUXOS6cLFL6YeCukLnzO4Noiz_k9P7YzqwY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+</div>
+<!-- L-Bracket Detail -->
+<div class="absolute top-8 left-8 w-6 h-6 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute bottom-12 left-10 z-10 transition-transform duration-700 group-hover:-translate-y-4">
+<div class="font-mono text-[9px] text-primary tracking-[0.4em] mb-4">01 // ESSENCE</div>
+<h4 class="font-headline text-4xl text-on-surface mb-2">Espresso</h4>
+<p class="font-body text-sm font-light text-outline max-w-[200px] opacity-0 group-hover:opacity-100 transition-opacity duration-700">The purest expression of single-origin ritual.</p>
+<div class="mt-4 h-[1px] w-0 group-hover:w-full bg-primary transition-all duration-700"></div>
+</div>
+<!-- Depth Micro-detail -->
+<div class="absolute top-8 right-8 font-mono text-[8px] text-primary/40 vertical-rl tracking-[0.3em]">ALTITUDE: 2100M</div>
+</div>
+<!-- Pour-Over Card -->
+<div class="group relative overflow-hidden parallax-card cursor-pointer border border-outline-variant/30 mt-12 md:mt-24">
+<div class="absolute inset-0 z-0">
+<img alt="Pour Over" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 parallax-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEvJG6B9dB1SNja6GjW3Rju9pJN7jfmwIRpKu7S4dAwbykHr7LSRCIX4FaATrAD0i2q_EYSxSJLFxTYy1GEI6smcAQd2oSGanyRKYhgSOaS9ppvh-VqmqR0HrQHOmuZ71d4tcafpnfUIu4M3rNhVpiK6Sego1tL6Lc6tGPwlRNFcjJRq5q1dyChzxNkqKEmo5SqzvP9nF6gvwwiUte1Y5BO6PqYK90OF4z5oFdOlOe0FoX6qU79wVhJn_CyK7DqU2CBKyxr3YiETE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+</div>
+<div class="absolute top-8 left-8 w-6 h-6 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute bottom-12 left-10 z-10 transition-transform duration-700 group-hover:-translate-y-4">
+<div class="font-mono text-[9px] text-primary tracking-[0.4em] mb-4">02 // PATIENCE</div>
+<h4 class="font-headline text-4xl text-on-surface mb-2">Pour-Over</h4>
+<p class="font-body text-sm font-light text-outline max-w-[200px] opacity-0 group-hover:opacity-100 transition-opacity duration-700">A slow-gravity ritual uncovering hidden complexities.</p>
+<div class="mt-4 h-[1px] w-0 group-hover:w-full bg-primary transition-all duration-700"></div>
+</div>
+<div class="absolute top-8 right-8 font-mono text-[8px] text-primary/40 vertical-rl tracking-[0.3em]">TEMP: 94.2°C</div>
+</div>
+<!-- Cold Craft Card -->
+<div class="group relative overflow-hidden parallax-card cursor-pointer border border-outline-variant/30">
+<div class="absolute inset-0 z-0">
+<img alt="Cold Brew" class="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-75 parallax-bg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsrISjs3EciBLrOxGaFVBUfOvHw0rHsoh6UP_r7iOHXFueqaP8A8jKnjx0c47B7ZrJOgTu06691ec0oQh0f2VGVJotPKrjAGInquqKb1jw_DHr1n0rpk8ssY3R2N9w7nglg2Pn-LyZ7_epkMC6-SUyILp48hRf-0rmY0wxxv19bsyOIRamFBX4iQeBZbzAZdL-jL5z_uzrQfp30Adhrb6G9RHPCOwOhsPwssfWMkwReL2wq6p4rIW_94j3jK0CtJR08KBvKPh_EbA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90"></div>
+</div>
+<div class="absolute top-8 left-8 w-6 h-6 border-t border-l border-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="absolute bottom-12 left-10 z-10 transition-transform duration-700 group-hover:-translate-y-4">
+<div class="font-mono text-[9px] text-primary tracking-[0.4em] mb-4">03 // TIME</div>
+<h4 class="font-headline text-4xl text-on-surface mb-2">Cold Craft</h4>
+<p class="font-body text-sm font-light text-outline max-w-[200px] opacity-0 group-hover:opacity-100 transition-opacity duration-700">Precision immersion steeped for twenty-four hours.</p>
+<div class="mt-4 h-[1px] w-0 group-hover:w-full bg-primary transition-all duration-700"></div>
+</div>
+<div class="absolute top-8 right-8 font-mono text-[8px] text-primary/40 vertical-rl tracking-[0.3em]">STEEP: 24HR</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Craft Detailed Feature -->
+<section class="bg-surface py-40 overflow-hidden">
+<div class="max-w-screen-2xl mx-auto px-12 grid grid-cols-1 md:grid-cols-12 gap-24 items-center">
+<div class="md:col-span-5 relative">
+<div class="relative z-10 p-2 border border-primary/20 bg-background">
+<img alt="Master Barista" class="w-full grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBimpSA2sC66S3_ZQjNXJXi-TyU-s11HoH2sW3RjTHWf3WyC2ZMf37vI8DwTVmwnZwjymO4VBvS3TMHEJpWu2DpvsH64D3KCyYZj8uhPcnM-srBQoSPLgXY-4zvRNwiiZ3-GDwcWEFnVldIVUgwXKRLCaKnMLuSTfpvho3xvW6ddDyQQext4XIH7t6KyIckBklF2ccC73mmyxiekx1p_jdvIXh4iXj5QsQnqaNVcKPoB4rD1DfTSRuJJ1yo85LK-NScLVlHrJxvoWg"/>
+</div>
+<!-- Rotating Badge -->
+<div class="absolute -top-12 -right-12 w-48 h-48 animate-[spin_20s_linear_infinite] pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<path d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none" id="circlePath"></path>
+<text class="font-mono text-[5.5px] tracking-[0.4em] fill-primary uppercase">
+<textpath href="#circlePath">SINGLE ORIGIN • CERTIFIED ALCHEMIST • OBSESSIVE EXTRACTION • </textpath>
+</text>
+</svg>
+</div>
+</div>
+<div class="md:col-span-7">
+<div class="flex items-center gap-4 mb-6">
+<div class="h-[1px] w-8 bg-primary"></div>
+<span class="font-subheadline text-[10px] tracking-widest text-primary uppercase">The Methodology</span>
+</div>
+<h2 class="font-headline text-6xl text-on-surface leading-tight mb-10">The Artisan's Obsession</h2>
+<div class="space-y-8 font-body font-light text-xl text-outline max-w-xl leading-relaxed">
+<p>At CoffeeCraft, we don't just brew; we translate. Every bean arrives with a history of soil, rain, and elevation. Our role is to ensure not a single note is lost in translation.</p>
+<p>Through our proprietary triple-filtration and thermal-staged Lab, we chase the precise second where chemistry becomes soul.</p>
+</div>
+<div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-12 border-t border-outline-variant/30 pt-12">
+<div>
+<span class="font-headline text-3xl text-primary">94°C</span>
+<p class="font-mono text-[8px] uppercase tracking-widest mt-2 text-outline">Precise Extraction</p>
+</div>
+<div>
+<span class="font-headline text-3xl text-primary">1:16</span>
+<p class="font-mono text-[8px] uppercase tracking-widest mt-2 text-outline">Brew Ratio</p>
+</div>
+<div>
+<span class="font-headline text-3xl text-primary">22g</span>
+<p class="font-mono text-[8px] uppercase tracking-widest mt-2 text-outline">Dose Weight</p>
+</div>
+<div>
+<span class="font-headline text-3xl text-primary">30s</span>
+<p class="font-mono text-[8px] uppercase tracking-widest mt-2 text-outline">Contact Time</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="relative w-full py-24 px-12 bg-surface-container-lowest border-t border-primary/10">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16 w-full max-w-screen-2xl mx-auto">
+<div class="md:col-span-2">
+<div class="text-2xl font-subheadline tracking-[0.2em] text-primary uppercase mb-6">
+                    COFFEE·CRAFT
+                </div>
+<p class="font-script text-2xl text-on-surface/60 mb-8">Where craft meets cup.</p>
+<p class="font-mono text-[9px] text-outline uppercase tracking-[0.3em] leading-loose">
+                    © 2024 CoffeeCraft Archive. <br/>
+                    DHA Lahore, Pakistan. <br/>
+                    Coordinates: 31.4697° N, 74.4022° E
+                </p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col gap-4">
+<span class="font-subheadline text-[10px] tracking-widest text-primary uppercase mb-2">Explore</span>
+<a class="font-body font-light text-sm text-outline hover:text-on-surface transition-colors" href="#">The Philosophy</a>
+<a class="font-body font-light text-sm text-outline hover:text-on-surface transition-colors" href="#">Sourcing</a>
+<a class="font-body font-light text-sm text-outline hover:text-on-surface transition-colors" href="#">Brew Lab</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-subheadline text-[10px] tracking-widest text-primary uppercase mb-2">Service</span>
+<a class="font-body font-light text-sm text-outline hover:text-on-surface transition-colors" href="#">Reservations</a>
+<a class="font-body font-light text-sm text-outline hover:text-on-surface transition-colors" href="#">Private Events</a>
+<a class="font-body font-light text-sm text-outline hover:text-on-surface transition-colors" href="#">Contact</a>
+</div>
+</div>
+<div class="flex flex-col items-start md:items-end justify-between">
+<div class="flex flex-col items-start md:items-end gap-6">
+<p class="font-mono text-[9px] text-primary/40 tracking-widest uppercase">The Lab Connection</p>
+<div class="flex gap-8">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" data-icon="share">share</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" data-icon="mail">mail</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform" data-icon="room">room</span>
+</div>
+</div>
+<button class="font-subheadline text-[9px] tracking-[0.4em] uppercase text-primary border-b border-primary/30 pb-1 mt-12 md:mt-0">Back to Top</button>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const statement = document.getElementById('statement-content');
+        if (statement) observer.observe(statement);
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const parallaxElements = document.querySelectorAll('.parallax-bg');
+            let offset = window.pageYOffset;
+            parallaxElements.forEach(el => {
+                let speed = 0.5;
+                el.style.transform = `translateY(${offset * speed * 0.1}px) scale(1.1)`;
+            });
+        });
+    </script>
+</body></html>
